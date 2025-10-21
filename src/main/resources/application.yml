@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: smartlife
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/smartlife
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+              client-id:  779906751141-mifrrk1krvogk7b9ahikaelhm5k18fv9.apps.googleusercontent.com
+              client-secret: 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
+              scope:
+                - profile
+                - email
+
+
+
+
