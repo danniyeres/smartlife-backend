@@ -1,12 +1,11 @@
 # SmartLife Backend (Spring Boot)
 
-Это backend-часть проекта **SmartLife** — приложения для управления задачами (To-Do / Task Manager).  
-Проект написан на **Java + Spring Boot**, использует **JWT авторизацию**, **PostgreSQL**, **JPA/Hibernate**  
-и предоставляет REST API для работы с пользователями и задачами.
+SmartLife is a backend service for a task management application (To-Do / Task Manager).  
+Built with **Java + Spring Boot**, using **JWT authentication**, **PostgreSQL**, and **JPA/Hibernate**.
 
 ---
 
-## ✅ Стек технологий
+## Tech Stack
 
 - Java 17
 - Spring Boot
@@ -19,15 +18,16 @@
 
 ---
 
-## ✅ Структура проекта
+## Project Structure
+
 
 ```
 src/main/java/org/example/smartlifebackend/
 │
-├── controller/        # REST-контроллеры
-├── dto/               # DTO модели
-├── model/             # JPA сущности
-├── service/           # Бизнес-логика
+├── controller/        # REST controllers
+├── dto/               # DTO models
+├── model/             # JPA entities
+├── service/           # Business logic
 ├── exception/         # GlobalExceptionHandler
 └── SmartlifeBackendApplication.java
 ```
@@ -36,7 +36,7 @@ src/main/java/org/example/smartlifebackend/
 
 ## ✅ Запуск проекта
 
-### 1. Установи всё необходимое
+### 1. Requirements
 
 - Java 17+
 - Maven
@@ -46,9 +46,10 @@ src/main/java/org/example/smartlifebackend/
 
 ---
 
-## ✅ Настройки базы данных
+## ✅ Database Setup
 
-### Создай БД:
+
+### Create the database:
 
 ```bash
 psql postgres
@@ -61,21 +62,21 @@ CREATE DATABASE smartlife;
 
 ---
 
-## ✅ Запуск Spring Boot
+## ✅ Run the Application
 
-Запустить в корне проекта:
+### 1.In the project root, run:
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-или если Maven установлен:
+or if Maven is installed:
 
 ```bash
 mvn spring-boot:run
 ```
 
-После запуска приложение доступно на:
+After startup, the application is available at
 
 ```
 http://localhost:8080
