@@ -1,6 +1,5 @@
-package org.example.smartlifebackend.dto.request;
+package org.example.smartlifebackend.dto.response;
 
-import jakarta.annotation.Nullable;
 import lombok.*;
 
 @Getter
@@ -8,12 +7,12 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class UserUpdateDto {
-
+public class UserResponse {
+    private Long id;
     private String username;
     private String firstName;
     private String lastName;
     private String email;
     private String avatar;
 }
+

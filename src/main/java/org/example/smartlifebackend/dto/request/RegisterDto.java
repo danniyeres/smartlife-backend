@@ -19,14 +19,4 @@ public class RegisterDto {
     @NotNull (message = "Password cannot be null")
     private String password;
 
-
-    public UserDto toUserDto() {
-        return UserDto.builder()
-                .firstName(firstName)
-                .lastName(lastName)
-                .username(username)
-                .email(email)
-                .password(password)
-                .build();
-    }
 }

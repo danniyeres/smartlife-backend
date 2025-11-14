@@ -7,6 +7,7 @@ import org.example.smartlifebackend.model.Task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Getter
 @Setter
@@ -17,36 +18,12 @@ public class TaskDto {
 
     private Long id;
     private String title;
-    private LocalDate date;
-    private Status status;
-    private Priority priority;
-    private String description;
-    private String imageUrl;
-    private LocalDateTime createdAt;
+    private String desc;
+    private String priority; // Extreme | Moderate | Low
+    private String status;   // Not Started | In Progress | Completed
+    private LocalDateTime deadline;
+    private String coverImage;
+    private String accent;
+    private OffsetDateTime completedAt;
 
-    public static TaskDto fromEntity(Task task) {
-        return TaskDto.builder()
-                .id(task.getId())
-                .title(task.getTitle())
-                .date(task.getDate())
-                .status(task.getStatus())
-                .priority(task.getPriority())
-                .description(task.getDescription())
-                .imageUrl(task.getImageUrl())
-                .createdAt(task.getCreatedAt())
-                .build();
-    }
-
-    public Task toEntity() {
-        return Task.builder()
-                .id(id)
-                .title(title)
-                .date(date)
-                .status(status)
-                .priority(priority)
-                .description(description)
-                .imageUrl(imageUrl)
-                .createdAt(createdAt)
-                .build();
-    }
 }

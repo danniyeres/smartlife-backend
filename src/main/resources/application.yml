@@ -15,18 +15,3 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
-
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-              client-id:  779906751141-mifrrk1krvogk7b9ahikaelhm5k18fv9.apps.googleusercontent.com
-              client-secret: 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
-              scope:
-                - profile
-                - email
-
-
-
-

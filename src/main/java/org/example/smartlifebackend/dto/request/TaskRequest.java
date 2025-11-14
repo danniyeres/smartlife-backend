@@ -6,6 +6,8 @@ import org.example.smartlifebackend.model.Priority;
 import org.example.smartlifebackend.model.Status;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Getter
 @Setter
@@ -16,15 +18,9 @@ import java.time.LocalDate;
 public class TaskRequest {
 
     private String title;
-
-    private String description;
-
-    @FutureOrPresent(message = "Date cannot be in the past")
-    private LocalDate date;
-
-    private Status status; // IN_PROGRESS, COMPLETED, NOT_STARTED
-
-    private Priority priority; // LOW, MEDIUM, HIGH
-
-    private String imageUrl;
+    private String desc;
+    private String priority; // Extreme | Moderate | Low
+    private String status;   // Not Started | In Progress | Completed
+    private LocalDateTime deadline; // iso 8601 format
+    private String coverImage; // url
 }

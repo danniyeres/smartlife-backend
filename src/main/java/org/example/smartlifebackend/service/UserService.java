@@ -16,9 +16,16 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public void addUser(UserDto userDto) {
-        log.info("Adding new user: {}", userDto.getUsername());
-        userRepository.save(userDto.toEntity());
+    public void addUser(User user) {
+        log.info("Adding new user: {}", user.getUsername());
+        userRepository.save(User.builder()
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .avatar(user.getAvatar())
+                .build());
     }
 
     public UserDto updateUser(Long userId, UserUpdateDto userDto) {
@@ -29,12 +36,19 @@ public class UserService {
         if (userDto.getLastName() != null) existingUser.setLastName(userDto.getLastName());
         if (userDto.getUsername() != null) existingUser.setUsername(userDto.getUsername());
         if (userDto.getEmail() != null) existingUser.setEmail(userDto.getEmail());
-        if (userDto.getAvatarUrl() != null) existingUser.setAvatarUrl(userDto.getAvatarUrl());
+        if (userDto.getAvatar() != null) existingUser.setAvatar(userDto.getAvatar());
 
         User updatedUser = userRepository.save(existingUser);
 
         log.info("User updated: {}", updatedUser.getUsername());
-        return UserDto.fromEntity(updatedUser);
+        return UserDto.builder()
+                .id(updatedUser.getId())
+                .firstName(updatedUser.getFirstName())
+                .lastName(updatedUser.getLastName())
+                .username(updatedUser.getUsername())
+                .email(updatedUser.getEmail())
+                .avatar(updatedUser.getAvatar())
+                .build();
     }
 
     public UserDto changePassword(Long userId, String newPassword) {
@@ -46,7 +60,29 @@ public class UserService {
         User updatedUser = userRepository.save(existingUser);
 
         log.info("User password changed: {}", updatedUser.getUsername());
-        return UserDto.fromEntity(updatedUser);
+        return UserDto.builder()
+                .id(updatedUser.getId())
+                .username(updatedUser.getUsername())
+                .firstName(updatedUser.getFirstName())
+                .lastName(updatedUser.getLastName())
+                .email(updatedUser.getEmail())
+                .avatar(updatedUser.getAvatar())
+                .build();
+    }
+
+    public UserDto getUserById(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        return UserDto.builder()
+
+                .id(user.getId())
+                .username(user.getUsername())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .avatar(user.getAvatar())
+                .build();
     }
 
     public User findByUsername(String username) {

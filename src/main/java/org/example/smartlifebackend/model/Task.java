@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Getter
 @Setter
@@ -19,29 +20,27 @@ public class Task {
     private Long id;
 
     private String title;
-    private LocalDate date;
+
+    @Column(columnDefinition = "TEXT", name = "description")
+    private String desc;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Priority priority; // Extreme | Moderate | Low
+
     @Enumerated(EnumType.STRING)
-    private Priority priority;
+    private Status status;  // Not Started | In Progress | Completed
 
-    @Column (length = 2000)
-    private String description;
+    private LocalDateTime deadline; //
 
+    @Column(columnDefinition = "TEXT")
+    private String coverImage;
 
-    private String imageUrl;
-    private LocalDateTime createdAt;
+    @Column(columnDefinition = "TEXT")
+    private String accent;
 
-
+    private OffsetDateTime completedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
 }

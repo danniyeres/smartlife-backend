@@ -3,7 +3,6 @@ package org.example.smartlifebackend.config;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.example.smartlifebackend.repository.UserRepository;
-import org.example.smartlifebackend.security.CustomOAuth2SuccessHandler;
 import org.example.smartlifebackend.security.CustomUserDetailsService;
 import org.example.smartlifebackend.security.JwtFilter;
 import org.example.smartlifebackend.security.JwtService;
@@ -27,8 +26,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     private final JwtFilter jwtFilter;
     private final CustomUserDetailsService userDetailService;
-    private final JwtService jwtService;
-    private final UserRepository userRepository;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -39,8 +36,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(
                                 "/welcome",
-                                "/auth/login",
-                                "auth/register" ,
+                                "/api/auth/login",
+                                "/api/auth/register" ,
                                 "/oauth2/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
@@ -54,10 +51,6 @@ public class SecurityConfig {
                 )
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .oauth2Login(oauth -> oauth
-                        .successHandler(new CustomOAuth2SuccessHandler(jwtService, userRepository))
-
-                )
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
 
