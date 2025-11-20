@@ -1,30 +1,28 @@
-version: "3.9"
-
 services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: pg
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: smartlife_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    shm_size: 64m
+    mem_limit: 96m
+
   backend:
     build: .
-    container_name: smartlife-backend
+    container_name: smartlife
+    restart: unless-stopped
     ports:
       - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/smartlife_db
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: postgres
     depends_on:
       - postgres
-    restart: unless-stopped
-
-  postgres:
-    image: postgres:alpine
-    container_name: smartlife-postgres
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: smartlife_db
-    ports:
-      - "5432:5432"
-    volumes:
-      - pg-data:/var/lib/postgresql/data
+    mem_limit: 320m
 
 volumes:
-  pg-data:
+  pgdata:

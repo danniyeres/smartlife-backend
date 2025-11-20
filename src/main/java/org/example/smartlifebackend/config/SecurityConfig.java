@@ -2,10 +2,8 @@ package org.example.smartlifebackend.config;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.example.smartlifebackend.repository.UserRepository;
 import org.example.smartlifebackend.security.CustomUserDetailsService;
 import org.example.smartlifebackend.security.JwtFilter;
-import org.example.smartlifebackend.security.JwtService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
