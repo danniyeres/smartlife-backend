@@ -32,11 +32,26 @@ public class UserService {
         User existingUser = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        if (userDto.getFirstName() != null) existingUser.setFirstName(userDto.getFirstName());
-        if (userDto.getLastName() != null) existingUser.setLastName(userDto.getLastName());
-        if (userDto.getUsername() != null) existingUser.setUsername(userDto.getUsername());
-        if (userDto.getEmail() != null) existingUser.setEmail(userDto.getEmail());
-        if (userDto.getAvatar() != null) existingUser.setAvatar(userDto.getAvatar());
+        if (userDto.getFirstName() != null) {
+            log.info("Updating first name for user {}: {} -> {}", existingUser.getUsername(), existingUser.getFirstName(), userDto.getFirstName());
+            existingUser.setFirstName(userDto.getFirstName());
+        }
+        if (userDto.getLastName() != null) {
+            log.info("Updating last name for user {}: {} -> {}", existingUser.getUsername(), existingUser.getLastName(), userDto.getLastName());
+            existingUser.setLastName(userDto.getLastName());
+        }
+        if (userDto.getUsername() != null) {
+            log.info("Updating username for user {}: {} -> {}", existingUser.getUsername(), existingUser.getUsername(), userDto.getUsername());
+            existingUser.setUsername(userDto.getUsername());
+        }
+        if (userDto.getEmail() != null) {
+            log.info("Updating email for user {}: {} -> {}", existingUser.getUsername(), existingUser.getEmail(), userDto.getEmail());
+            existingUser.setEmail(userDto.getEmail());
+        }
+        if (userDto.getAvatar() != null) {
+            log.info("Updating avatar for user {}", existingUser.getUsername());
+            existingUser.setAvatar(userDto.getAvatar());
+        }
 
         User updatedUser = userRepository.save(existingUser);
 

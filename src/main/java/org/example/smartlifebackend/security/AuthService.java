@@ -2,7 +2,6 @@ package org.example.smartlifebackend.security;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.smartlifebackend.dto.UserDto;
 import org.example.smartlifebackend.dto.request.LoginDto;
 import org.example.smartlifebackend.dto.request.RegisterDto;
 import org.example.smartlifebackend.dto.response.AuthResponse;
@@ -40,6 +39,8 @@ public class AuthService {
 
         log.info("User registered: {}", registerDto.getUsername());
 
+        var id = userService.findByUsername(registerDto.getUsername()).getId();
+
         return AuthResponse.builder()
                 .user(UserResponse.builder()
                         .id(userService.findByUsername(registerDto.getUsername()).getId())
@@ -48,8 +49,8 @@ public class AuthService {
                         .lastName(registerDto.getLastName())
                         .email(registerDto.getEmail())
                         .build())
-                .accessToken(jwtService.generateAccessToken(registerDto.getUsername()))
-                .refreshToken(jwtService.generateRefreshToken(registerDto.getUsername()))
+                .accessToken(jwtService.generateAccessToken(id ))
+                .refreshToken(jwtService.generateRefreshToken(id ))
                 .build();
     }
 
@@ -68,8 +69,8 @@ public class AuthService {
                         .lastName(existingUser.getLastName())
                         .email(existingUser.getEmail())
                         .build())
-                .accessToken(jwtService.generateAccessToken(existingUser.getUsername()))
-                .refreshToken(jwtService.generateRefreshToken(existingUser.getUsername()))
+                .accessToken(jwtService.generateAccessToken(existingUser.getId()))
+                .refreshToken(jwtService.generateRefreshToken(existingUser.getId()))
                 .build();
     }
 }
