@@ -18,5 +18,7 @@ public class RegisterDto {
     private String email;
     @NotNull (message = "Password cannot be null")
     private String password;
+    @NotNull (message = "Confirm Password cannot be null")
+    private String confirmPassword;
 
 }

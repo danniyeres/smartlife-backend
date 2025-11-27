@@ -27,6 +27,14 @@ public class AuthService {
             throw new IllegalArgumentException("Email is already taken");
         }
 
+        if (!registerDto.getPassword().equals(registerDto.getConfirmPassword())) {
+            throw new IllegalArgumentException("Passwords do not match");
+        }
+
+        if (registerDto.getPassword().length() < 8) {
+            throw new IllegalArgumentException("Password must be at least 8 characters long");
+        }
+
         registerDto.setPassword(passwordEncoder.encode(registerDto.getPassword()));
         userService.addUser(User.builder()
                 .username(registerDto.getUsername())
