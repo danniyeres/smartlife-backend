@@ -1,13 +1,12 @@
 package org.example.smartlifebackend.security;
 
+import io.micrometer.common.lang.Nullable;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.smartlifebackend.security.CustomUserDetailsService;
-import org.example.smartlifebackend.security.JwtService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,8 +27,8 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
+                                    @Nullable HttpServletResponse response,
+                                    @Nullable FilterChain filterChain) throws ServletException, IOException {
 
         final String authHeader = request.getHeader("Authorization");
         String token = null;
@@ -53,7 +52,6 @@ public class JwtFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
             } catch (UsernameNotFoundException e) {
-                // User not found, clear context and log warning
                 SecurityContextHolder.clearContext();
                 log.warn("JWT with userId {} rejected — user not found", userId);
             } catch (Exception e) {
@@ -62,6 +60,7 @@ public class JwtFilter extends OncePerRequestFilter {
             }
         }
 
+        assert filterChain != null;
         filterChain.doFilter(request, response);
     }
 }

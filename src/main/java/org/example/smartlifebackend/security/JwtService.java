@@ -13,9 +13,9 @@ import java.util.Date;
 @Slf4j
 public class JwtService {
 
-    private final String SECRET_KEY = "smartlifebackendsecretkeyforsigningjwttokensmartlifebackendsecretkeyforsigningjwttokens"; // минимум 256 бит!
+    private final String SECRET_KEY = "smartlifebackendsecretkeyforsigningjwttokensmartlifebackendsecretkeyforsigningjwttokens";
     private static final long ACCESS_EXPIRATION = 1000 * 60 * 60 * 24;      // 24 часа
-    private static final long REFRESH_EXPIRATION = 1000L * 60 * 60 * 24 * 30; // 30 дней (или сколько хочешь)
+    private static final long REFRESH_EXPIRATION = 1000L * 60 * 60 * 24 * 30; // 30 дней
 
     public String generateAccessToken(Long userId) {
         return generateToken(userId.toString(), ACCESS_EXPIRATION);
@@ -27,10 +27,10 @@ public class JwtService {
 
     private String generateToken(String subject, long expirationTime) {
         return Jwts.builder()
-                .setSubject(subject) // здесь теперь userId в виде строки
+                .setSubject(subject)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
-                .signWith(Keys.hmacShaKeyFor(SECRET_KEY.getBytes()), SignatureAlgorithm.HS512) // лучше HS512
+                .signWith(Keys.hmacShaKeyFor(SECRET_KEY.getBytes()), SignatureAlgorithm.HS512)
                 .compact();
     }
 

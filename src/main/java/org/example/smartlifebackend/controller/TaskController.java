@@ -3,8 +3,6 @@ package org.example.smartlifebackend.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.smartlifebackend.dto.TaskDto;
 import org.example.smartlifebackend.dto.request.TaskRequest;
-import org.example.smartlifebackend.model.Priority;
-import org.example.smartlifebackend.model.Status;
 import org.example.smartlifebackend.model.User;
 import org.example.smartlifebackend.security.CurrentUser;
 import org.example.smartlifebackend.service.TaskService;

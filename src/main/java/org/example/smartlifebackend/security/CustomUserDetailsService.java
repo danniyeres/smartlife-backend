@@ -14,7 +14,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository repository;
 
-    // Старый метод — оставляем для Spring Security (логин по username/password)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = repository.findByUsername(username)
@@ -23,7 +22,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new CustomUserDetails(user);
     }
 
-    // НОВЫЙ МЕТОД — основной для JWT-фильтра (поиск по ID)
     public UserDetails loadUserById(Long userId) throws UsernameNotFoundException {
         User user = repository.findById(userId)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with id: " + userId));

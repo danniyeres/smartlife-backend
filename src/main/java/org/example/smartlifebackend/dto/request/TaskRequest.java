@@ -1,13 +1,11 @@
 package org.example.smartlifebackend.dto.request;
 
-import jakarta.validation.constraints.FutureOrPresent;
-import lombok.*;
-import org.example.smartlifebackend.model.Priority;
-import org.example.smartlifebackend.model.Status;
 
-import java.time.LocalDate;
+import lombok.*;
+
+
+
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 
 @Getter
 @Setter

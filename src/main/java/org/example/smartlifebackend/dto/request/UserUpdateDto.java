@@ -1,6 +1,5 @@
 package org.example.smartlifebackend.dto.request;
 
-import jakarta.annotation.Nullable;
 import lombok.*;
 
 @Getter

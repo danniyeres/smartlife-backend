@@ -2,7 +2,6 @@ package org.example.smartlifebackend.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.example.smartlifebackend.dto.UserDto;
 
 @Getter
 @Setter
